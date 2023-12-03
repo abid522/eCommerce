@@ -1,0 +1,16 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "title": "Chair",
+      "description": "A very nice and comfortable ergonomic chair",
+      "price": 2000
+    },
+    {
+      "id": 2,
+      "title": "Table",
+      "description": "A table made of deodar wood which will last long",
+      "price": 5000
+    }
+  ]
+}
