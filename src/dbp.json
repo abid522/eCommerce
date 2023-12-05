@@ -3,14 +3,23 @@
     {
       "id": 1,
       "title": "Chair",
+      "imgUrl": "https://www.pexels.com/photo/brown-and-white-wooden-lounger-106839/",
       "description": "A very nice and comfortable ergonomic chair",
       "price": 2000
     },
     {
       "id": 2,
       "title": "Table",
+      "imgUrl": "https://www.pexels.com/photo/apartment-architecture-books-bookshelf-276651/",
       "description": "A table made of deodar wood which will last long",
       "price": 5000
+    },
+    {
+      "id": 3,
+      "title": "Water Bottle",
+      "imgUrl": "https://images.pexels.com/photos/1342529/pexels-photo-1342529.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "description": "A insulated bottle that will keep your water temperature intact",
+      "price": 350
     }
   ]
 }
