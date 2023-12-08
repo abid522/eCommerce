@@ -1,34 +1,38 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Product from "./Product";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProducts } from "../slices/productSlice";
+import Message from "./Message";
+import Spinner from "./Spinner";
+import Modal from "./Modal";
 
 function Products() {
-  const [products, setProducts] = useState([]);
+  const dispatch = useDispatch();
+  const product = useSelector((store) => store.product);
 
-  useEffect(function () {
-    async function fetchProducts() {
-      try {
-        const res = await fetch(
-          `https://my-json-server.typicode.com/abid522/ecommerce-products/products`
-        );
-        const data = await res.json();
-        setProducts(data);
-      } catch (error) {
-        console.error("Error loading products");
-      }
-    }
-
-    fetchProducts();
-  }, []);
+  useEffect(
+    function () {
+      dispatch(fetchProducts());
+    },
+    [dispatch]
+  );
 
   return (
     <div className="container">
-      <div className="row">
-        {products.map((product) => (
-          <div className="col-md-4" key={product.id}>
-            <Product product={product} />
+      {product.isLoading && <Spinner />}
+      {product.error && <Message message={product.error} />}
+      {!product.isLoading && !product.error && (
+        <>
+          <div className="row">
+            {product.products.map((product) => (
+              <div className="col-sm-4" key={product.id}>
+                <Product product={product} />
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+          <Modal />
+        </>
+      )}
     </div>
   );
 }
