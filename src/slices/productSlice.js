@@ -1,11 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  id: "",
-  title: "",
-  imageUrl: "",
-  description: "",
-  price: "",
   products: [],
   isLoading: false,
   error: "",
@@ -29,19 +24,74 @@ const productSlice = createSlice({
   initialState,
   reducers: {
     addProduct: {
-      prepare(id, title, imageUrl, description, price) {
+      prepare(id, title, imgUrl, description, price) {
         return {
-          payload: { id, title, imageUrl, description, price },
+          payload: { id, title, imgUrl, description, price },
         };
       },
 
       reducer(state, action) {
-        state.id = action.payload.id;
-        state.title = action.payload.title;
-        state.imageUrl = action.payload.imageUrl;
-        state.description = action.payload.description;
-        state.price = action.payload.price;
+        const newProduct = {
+          id: action.payload.id,
+          title: action.payload.title,
+          imgUrl: action.payload.imgUrl,
+          description: action.payload.description,
+          price: action.payload.price,
+        };
+
+        state.products.unshift(newProduct);
       },
+    },
+    updateProductDescription: {
+      prepare(description, id) {
+        return {
+          payload: { description, id },
+        };
+      },
+
+      reducer(state, action) {
+        //first we need to select the desired product from the array
+        const selectedProduct = state.products.find(
+          (p) => p.id === action.payload.id
+        );
+        const selectedProductIndex = state.products.findIndex(
+          (p) => p.id === action.payload.id
+        );
+        const updatedProduct = {
+          ...selectedProduct,
+          description: action.payload.description,
+        };
+        state.products.splice(selectedProductIndex, 1, updatedProduct);
+      },
+    },
+    updateProductPrice: {
+      prepare(price, id) {
+        return {
+          payload: { price, id },
+        };
+      },
+
+      reducer(state, action) {
+        //first we need to select the desired product from the array
+        const selectedProduct = state.products.find(
+          (p) => p.id === action.payload.id
+        );
+        const selectedProductIndex = state.products.findIndex(
+          (p) => p.id === action.payload.id
+        );
+        const updatedProduct = {
+          ...selectedProduct,
+          price: action.payload.price,
+        };
+        state.products.splice(selectedProductIndex, 1, updatedProduct);
+      },
+    },
+    deleteProduct(state, action) {
+      const selectedProductIndex = state.products.findIndex(
+        (p) => p.id === action.payload
+      );
+
+      state.products.splice(selectedProductIndex, 1);
     },
   },
   extraReducers: (builder) => {
@@ -60,5 +110,10 @@ const productSlice = createSlice({
   },
 });
 
-export const { addProduct } = productSlice.actions;
+export const {
+  addProduct,
+  updateProductDescription,
+  updateProductPrice,
+  deleteProduct,
+} = productSlice.actions;
 export default productSlice.reducer;

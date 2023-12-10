@@ -1,4 +1,21 @@
+import { useDispatch } from "react-redux";
+import Modal from "./Modal";
+import { deleteProduct } from "../slices/productSlice";
+
 function Product({ product }) {
+  const dispatch = useDispatch();
+
+  async function onDelete() {
+    const res = await fetch(
+      `https://my-json-server.typicode.com/abid522/ecommerce-products/products/${product.id}`,
+      { method: "DELETE" }
+    );
+    //PRODUCT DELETED
+    const data = await res.json();
+    console.log(data);
+    dispatch(deleteProduct(product.id));
+  }
+
   return (
     <div className="card mt-4 mx-2" style={{ width: "400px" }}>
       <img
@@ -21,11 +38,16 @@ function Product({ product }) {
               </p>
             </b>
           </div>
-          <div>
-            <button className="btn btn-primary btn-sm mx-1">
+          <div className="d-flex">
+            <button
+              className="btn btn-primary btn-sm mx-1"
+              data-bs-toggle="modal"
+              data-bs-target={`#n${product.id}`}
+            >
               <i className="fa-solid fa-pencil"></i>
             </button>
-            <button className="btn btn-danger btn-sm">
+            <Modal product={product} />
+            <button className="btn btn-danger btn-sm" onClick={onDelete}>
               <i className="fa-solid fa-trash"></i>
             </button>
           </div>

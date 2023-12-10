@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../slices/productSlice";
 import Message from "./Message";
 import Spinner from "./Spinner";
-import Modal from "./Modal";
 
 function Products() {
   const dispatch = useDispatch();
@@ -30,7 +29,6 @@ function Products() {
               </div>
             ))}
           </div>
-          <Modal />
         </>
       )}
     </div>

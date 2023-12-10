@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import styles from "./Navbar.module.css";
 
 function Navbar() {
@@ -5,9 +6,9 @@ function Navbar() {
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
         {/* Site Logo */}
-        <a className={`navbar-brand ${styles.gradient}`} href="/">
+        <NavLink className={`navbar-brand ${styles.gradient}`} to="/">
           eCommerce
-        </a>
+        </NavLink>
         {/* Mobile Toggle Button */}
         <button
           className="navbar-toggler"
@@ -23,25 +24,20 @@ function Navbar() {
         <div className="collapse navbar-collapse" id="navbarMobileToggle">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="/">
-                All Products
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="/">
+              <NavLink className="nav-link" to="/add-product">
                 Add Product
-              </a>
+              </NavLink>
             </li>
 
             <li className="nav-item">
-              <a className="nav-link" href="/">
+              <NavLink className="nav-link" to="/cart">
                 Cart
-              </a>
+              </NavLink>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/">
+              <NavLink className="nav-link" to="/about">
                 About
-              </a>
+              </NavLink>
             </li>
           </ul>
 
