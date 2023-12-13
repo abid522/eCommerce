@@ -1,0 +1,12 @@
+.developer {
+  padding: 20px;
+  text-align: center;
+  color: white;
+  background: linear-gradient(to right, rgb(73, 73, 223), rgb(166, 69, 166));
+  padding: 3px;
+  margin-bottom: 5rem;
+}
+
+.social {
+  color: white;
+}

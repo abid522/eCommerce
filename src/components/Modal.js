@@ -3,6 +3,7 @@ import {
   updateProductDescription,
   updateProductPrice,
 } from "../slices/productSlice";
+import { toast } from "react-toastify";
 
 function Modal({ product }) {
   const dispatch = useDispatch();
@@ -19,35 +20,44 @@ function Modal({ product }) {
   }
 
   async function onUpdateProduct(e) {
-    e.preventDefault();
-    const updatedDescription = productState.products.find(
-      (p) => p.id === product.id
-    ).description;
-    const updatedPrice = productState.products.find(
-      (p) => p.id === product.id
-    ).price;
+    try {
+      e.preventDefault();
+      const updatedDescription = productState.products.find(
+        (p) => p.id === product.id
+      ).description;
+      const updatedPrice = productState.products.find(
+        (p) => p.id === product.id
+      ).price;
 
-    //make the API call
-    const res = await fetch(
-      `https://my-json-server.typicode.com/abid522/ecommerce-products/products/${product.id}`,
-      {
-        method: "PUT",
-        body: JSON.stringify({
-          id: product.id,
-          title: product.title,
-          imageUrl: product.imageUrl,
-          description: updatedDescription,
-          price: updatedPrice,
-        }),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-        },
-      }
-    );
+      //make the API call
+      const res = await fetch(
+        `https://my-json-server.typicode.com/abid522/ecommerce-products/products/${product.id}`,
+        {
+          method: "PUT",
+          body: JSON.stringify({
+            id: product.id,
+            title: product.title,
+            imageUrl: product.imageUrl,
+            description: updatedDescription,
+            price: updatedPrice,
+          }),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+          },
+        }
+      );
 
-    //PRODUCT UPDATED
-    const data = await res.json();
-    console.log(data);
+      //PRODUCT UPDATED
+      const data = await res.json();
+      console.log(data);
+      toast.success("Product Updated", {
+        theme: "dark",
+      });
+    } catch (error) {
+      toast.error(error.message, {
+        theme: "dark",
+      });
+    }
   }
 
   return (

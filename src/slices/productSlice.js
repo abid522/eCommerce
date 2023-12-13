@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   products: [],
+  cart: [],
   isLoading: false,
   error: "",
 };
@@ -93,6 +94,22 @@ const productSlice = createSlice({
 
       state.products.splice(selectedProductIndex, 1);
     },
+    addToCart: {
+      prepare(title, price) {
+        return {
+          payload: { title, price },
+        };
+      },
+
+      reducer(state, action) {
+        const cartItem = {
+          title: action.payload.title,
+          price: action.payload.price,
+        };
+
+        state.cart.push(cartItem);
+      },
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -115,5 +132,6 @@ export const {
   updateProductDescription,
   updateProductPrice,
   deleteProduct,
+  addToCart,
 } = productSlice.actions;
 export default productSlice.reducer;
