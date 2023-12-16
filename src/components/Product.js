@@ -1,13 +1,20 @@
 import { useDispatch } from "react-redux";
 import Modal from "./Modal";
-import { deleteProduct } from "../slices/productSlice";
+import { addToCart, deleteProduct } from "../slices/productSlice";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 function Product({ product }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   function onAddToCart() {
-    dispatch(product.title, product.price);
+    dispatch(addToCart(product.title, product.price));
+    navigate("/cart");
+  }
+
+  function onSeeDetails() {
+    navigate(`/product-detail/${product.id}`);
   }
 
   async function onDelete() {
@@ -36,6 +43,7 @@ function Product({ product }) {
         <div className="card-body">
           <h4 className="card-title">{product.title}</h4>
           <p className="card-text">{product.description}</p>
+
           <div className="d-flex justify-content-between">
             <div>
               <b>
@@ -69,6 +77,12 @@ function Product({ product }) {
             <span>
               <i className="fa-solid fa-cart-plus"></i>
             </span>
+          </button>
+          <button
+            className="btn btn-secondary btn-sm w-100 mt-2"
+            onClick={onSeeDetails}
+          >
+            See Details{" "}
           </button>
         </div>
       </div>

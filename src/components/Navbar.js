@@ -1,7 +1,11 @@
 import { NavLink } from "react-router-dom";
 import styles from "./Navbar.module.css";
+import { useSelector } from "react-redux";
 
 function Navbar() {
+  const cart = useSelector((store) => store.product.cart);
+  const cartItemCount = cart.length;
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
@@ -32,6 +36,9 @@ function Navbar() {
             <li className="nav-item">
               <NavLink className="nav-link" to="/cart">
                 Cart
+                <span className="badge rounded-pill bg-danger mx-1">
+                  {cartItemCount}
+                </span>
               </NavLink>
             </li>
             <li className="nav-item">

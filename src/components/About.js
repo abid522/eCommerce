@@ -6,7 +6,7 @@ function About() {
   return (
     <div>
       <Navbar />
-      <div className={styles.developer}>
+      <div className={`${styles.developer} py-5`}>
         <h4 className="display-4">
           Designed and Developed by <b>Abidul Haque</b>
         </h4>
