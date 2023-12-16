@@ -27,7 +27,7 @@ function AddProduct() {
         {
           method: "POST",
           body: JSON.stringify({
-            id: n + 1,
+            id: (n + 1).toString(),
             title,
             imgUrl,
             description,
