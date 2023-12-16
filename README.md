@@ -1,3 +1,12 @@
+# eCommerce App
+
+This is the frontend of a eCommerce website developed using React and styled using bootstrap 5.
+We are fetching the products from acustomised [typicode API](https://my-json-server.typicode.com/).
+The app has functionality of updating, deleting, adding and sorting the products.
+We can add any product to the cart and we will get a navbar notification on how many items are there in the cart.
+
+![demo](/homepage.png)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
